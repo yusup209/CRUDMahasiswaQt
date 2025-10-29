@@ -16,8 +16,8 @@ project (.pro) menggunakan keyword `include`.
 
 ### Screenshot
 
-Berikut adalah screenshot aplikasi ini di platform macOS (Ventura).
+Berikut adalah screenshot aplikasi ini di platform Windows 11.
 
-![screenshot on macOS](screenshots/screenshotCRUDMahasiswa_on_macOS.png 
+![screenshot on macOS](screenshots/screenshotCRUDMahasiswa_on_Windows.png 
 "Tangkapan layar aplikasi 
-di macOS Ventura")
+di Windows 11")
