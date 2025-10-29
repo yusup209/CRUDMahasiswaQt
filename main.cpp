@@ -2,9 +2,10 @@
 
 #include <QApplication>
 #include <QStyleFactory>
-#include <AppKit/AppKit.h>
+//#include <AppKit/AppKit.h>
 
 /**** beberapa method untuk kustomisasi warna dari titlebar khusus untuk macos ****/
+/*
 double gammaCorrect(double c) {
     c /= 255.0;
     return (c <= 0.03928) ? (c / 12.92) : pow((c + 0.055) / 1.055, 2.4);
@@ -26,6 +27,7 @@ void setCustomizedTitleBar(WId i, QColor clrInHexFromWidgetbG){
       windowDiag.backgroundColor = [NSColor colorWithRed: ((double)clrInHexFromWidgetbG.red()/255.0) green: ((double)clrInHexFromWidgetbG.green()/255.0) blue: ((double)clrInHexFromWidgetbG.blue()/255.0) alpha:1.];
       windowDiag.appearance = [NSAppearance appearanceNamed: (isDark(clrInHexFromWidgetbG))?NSAppearanceNameVibrantDark:NSAppearanceNameVibrantLight];
 }
+*/
 
 void checkForHomeDir(){
     QString dirStr  = QString("%1/%2").arg(QDir::homePath()).arg(AppEnv::APP_HOMEDIR_NAME);
@@ -43,6 +45,7 @@ void checkForHomeDir(){
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setWindowIcon(QIcon(":logos/logo_crudMahasiswa_64px.png"));
     checkForHomeDir();
 
     //apply css
@@ -59,6 +62,7 @@ int main(int argc, char *argv[])
     MainWindow w;
 
     //apply custom title bar color in macOS
+    /*
     QColor clrInHexFromWidgetbG = QColor::fromString("#19232d"); //replace this color in hex with default QWidget background-color from applied theme (in css file)
 
     QObject::connect(&w, &MainWindow::dialogWinId, [&](WId i){
@@ -67,6 +71,7 @@ int main(int argc, char *argv[])
     // qDebug() << Q_FUNC_INFO << w.effectiveWinId();
 
     setCustomizedTitleBar(w.effectiveWinId(), clrInHexFromWidgetbG);
+    */
 
     w.show();
     return a.exec();

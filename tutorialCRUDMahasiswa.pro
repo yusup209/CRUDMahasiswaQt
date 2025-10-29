@@ -26,7 +26,7 @@ include(modules/PDFExporter/PDFExporter.pri)
 SOURCES += \
     dialogs/AboutDialog/aboutdialog.cpp \
     helpers/databasemanager.cpp \
-    main.mm \
+    main.cpp \
     mainwindow.cpp \
     models/tablemodel.cpp
 

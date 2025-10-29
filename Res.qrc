@@ -3,6 +3,7 @@
         <file>logos/logo_crudMahasiswa_512px.icns</file>
         <file>logos/logo_crudMahasiswa_512px.ico</file>
         <file>logos/logo_crudMahasiswa_512px.png</file>
+	<file>logos/logo_crudMahasiswa_64px.png</file>
     </qresource>
     <qresource prefix="/sysicon">
         <file>images/critical-freepik-white.png</file>

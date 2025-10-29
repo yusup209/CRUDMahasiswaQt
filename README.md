@@ -10,14 +10,14 @@ CSVExporter.
 Kedua kelas tersebut saya buat menjadi modul yang dapat dimasukkan ke file 
 project (.pro) menggunakan keyword `include`.
 
-### System Requirement (untuk macOS)
+### System Requirement (untuk Linux)
 - Qt 6.5 ke atas
-- macOS BigSur
+- Distro linux apapun yang dapat diinstal qt.
 
 ### Screenshot
 
-Berikut adalah screenshot aplikasi ini di platform macOS (Ventura).
+Berikut adalah screenshot aplikasi ini di platform Linux (Manjaro KDE).
 
-![screenshot on macOS](screenshots/screenshotCRUDMahasiswa_on_macOS.png 
+![screenshot on linux manjaro](screenshots/screenShotOnLinux_manjaro.png 
 "Tangkapan layar aplikasi 
-di macOS Ventura")
+di Manjaro KDE")

@@ -5,7 +5,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , dbManager(new DatabaseManager(QString("%1/%2/%3").arg(QDir::homePath()).arg(AppEnv::APP_HOMEDIR_NAME).arg(AppEnv::APP_DATABASE_NAME)))
-    , tblModel(new TableModel(ui->tableView))
+    , tblModel(new TableModel(this))
     , proxModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
