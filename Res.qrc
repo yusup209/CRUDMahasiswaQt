@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/logo">
+        <file>logos/logo_crudMahasiswa_512px.icns</file>
+        <file>logos/logo_crudMahasiswa_512px.ico</file>
+        <file>logos/logo_crudMahasiswa_512px.png</file>
+    </qresource>
+    <qresource prefix="/sysicon">
+        <file>images/critical-freepik-white.png</file>
+        <file>images/information-freepik-white.png</file>
+        <file>images/question-mark-freepik_white.png</file>
+        <file>images/warning-freepik-white.png</file>
+    </qresource>
+</RCC>
