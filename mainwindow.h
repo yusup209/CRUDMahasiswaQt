@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QObject>
 #include <QMainWindow>
 #include <QScopedPointer>
 #include <QMessageBox>
@@ -20,6 +21,10 @@
 #include "dialogs/AboutDialog/aboutdialog.h"
 #include "modules/CSVExporter/csvexporter.h"
 #include "modules/PDFExporter/pdfexporter.h"
+
+#include <Windows.h>
+#include <dwmapi.h>
+#pragma comment(lib, "dwmapi.lib")
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -55,6 +60,9 @@ private slots:
                                const QStringList &headers,
                                const QList<StudentsDataStruct> &data);
 
+    void changeTitlebarColor(WId winid);
+    double gammaCorrect(double c);
+    bool isDark(QColor color);
 
     int appMessageBox(const QMessageBox::Icon &msgBoxType, const QString &msgBoxTitle, const QString &msgBoxDesc);
 
@@ -87,9 +95,11 @@ private:
     int selectedStudentID = -1;
     QScopedPointer<QValidator> npmValidator;
 
+    QColor clrInHexFromWidgetbG = QColor::fromString("#19232D"); //replace this color in hex with default QWidget background-color from applied theme (in css file)
+
 
 signals:
-    void dialogWinId(WId i);
+    // void dialogWinId(WId i);
 
 };
 #endif // MAINWINDOW_H

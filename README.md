@@ -12,7 +12,7 @@ project (.pro) menggunakan keyword `include`.
 
 ### System Requirement (untuk macOS)
 - Qt 6.5 ke atas
-- macOS BigSur
+- Windows 10 22H2
 
 ### Screenshot
 

@@ -14,7 +14,8 @@
    <string>CRUD Mahasiswa</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLineEdit,QPushButton{padding-left: 8px; padding-right: 8px;}</string>
+   <string notr="true">QLineEdit,QPushButton{padding-left: 8px; padding-right: 8px;}
+QMenuBar{border:none;background-color:#19232D;}</string>
   </property>
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>true</bool>
@@ -440,12 +441,12 @@ QTableCornerButton::section {
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menututorialCRUDMahasiswa">
     <property name="title">
-     <string>CRUD Mahasiswa</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionAbout_this_app"/>
    </widget>

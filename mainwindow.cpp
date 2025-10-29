@@ -5,20 +5,23 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , dbManager(new DatabaseManager(QString("%1/%2/%3").arg(QDir::homePath()).arg(AppEnv::APP_HOMEDIR_NAME).arg(AppEnv::APP_DATABASE_NAME)))
-    , tblModel(new TableModel(ui->tableView))
+    , tblModel(new TableModel(this))
     , proxModel(new QSortFilterProxyModel(this))
 {
     ui->setupUi(this);
+    qDebug() << Q_FUNC_INFO << "welcome to MainWindow class, setting up rxNPM";
 
     QRegularExpression rxNPM("\\d+");
     npmValidator.reset(new QRegularExpressionValidator(rxNPM, this));
 
+    qDebug() << Q_FUNC_INFO << "checking for database connection....";
     if (!dbManager.get()->isDatabaseOpen()) {
         qCritical() << Q_FUNC_INFO << "Database tidak terbuka. Tidak dapat memuat data.";
 
         QMessageBox::warning(this, "Fail", "Fail to open database");
 
         setEnableControls(false);
+        return;
     } else {
         qDebug() << Q_FUNC_INFO << "Database sukses terbuka";
 
@@ -26,16 +29,18 @@ MainWindow::MainWindow(QWidget *parent)
 
         QTimer::singleShot(1750, this, &MainWindow::loadStudentsData);
     }
-
-
-    emit dialogWinId(this->effectiveWinId());
+    qDebug() << Q_FUNC_INFO << "database connection checking passed, setting integer validator to  NPM textbox";
 
     ui->lineEdit_2->setValidator(npmValidator.get());
 
     //set search icon to search textbox (lineEdit_4)
+    qDebug() << Q_FUNC_INFO << "Setting search icon to search textbox (above table)";
     QIcon icnSearch = QIcon(":/qss_icons/dark/rc/searchIcon_grey.png");
     ui->lineEdit_4->setClearButtonEnabled(true);
     ui->lineEdit_4->addAction(icnSearch, QLineEdit::LeadingPosition);
+
+    qDebug() << Q_FUNC_INFO << "done";
+    changeTitlebarColor(winId());
 }
 
 MainWindow::~MainWindow()
@@ -96,7 +101,6 @@ void MainWindow::loadStudentsData()
     QList<StudentsDataStruct> queryResult = dbManager->selectRecords(tableName, columnsToRetrieve);
 
     tblModel.get()->setTableData(queryResult);
-
 }
 
 void MainWindow::clearData()
@@ -565,5 +569,51 @@ void MainWindow::on_actionAbout_this_app_triggered()
 void MainWindow::on_pushButton_6_clicked()
 {
     exportDataToCSV();
+}
+
+
+
+void MainWindow::changeTitlebarColor(WId winid)
+{
+    // Get the window handle from Qt window
+    //HWND hwnd = (HWND)winId();
+    HWND hwnd = (HWND)winid;
+
+    // Make sure the window is using DWM composition
+    BOOL dwmEnabled = FALSE;
+    HRESULT hr = DwmIsCompositionEnabled(&dwmEnabled);
+    if (SUCCEEDED(hr) && dwmEnabled)
+    {
+        // Define titlebar colors
+        COLORREF titlebarColor = RGB(clrInHexFromWidgetbG.red(), clrInHexFromWidgetbG.green(), clrInHexFromWidgetbG.blue());      // Blue background
+        qDebug() << Q_FUNC_INFO << clrInHexFromWidgetbG.redF()/255.0;
+        COLORREF titleTextColor = isDark(clrInHexFromWidgetbG)?RGB(255,255,255):RGB(0,0,0);    // White text
+
+        // Set title bar color
+        DWMWINDOWATTRIBUTE dwAttribute = DWMWA_CAPTION_COLOR;
+        DwmSetWindowAttribute(hwnd, dwAttribute, &titlebarColor, sizeof(titlebarColor));
+
+        // Set title text color
+        dwAttribute = DWMWA_TEXT_COLOR;
+        DwmSetWindowAttribute(hwnd, dwAttribute, &titleTextColor, sizeof(titleTextColor));
+    }
+}
+
+
+
+double MainWindow::gammaCorrect(double c)
+{
+    c /= 255.0;
+    return (c <= 0.03928) ? (c / 12.92) : pow((c + 0.055) / 1.055, 2.4);
+}
+
+
+
+bool MainWindow::isDark(QColor color)
+{
+    double luminance = 0.2126 * gammaCorrect(color.red()) +
+                       0.7152 * gammaCorrect(color.green()) +
+                       0.0722 * gammaCorrect(color.blue());
+    return luminance < 0.5;
 }
 

@@ -2,9 +2,11 @@
 #define TABLEMODEL_H
 
 #include <QAbstractTableModel>
+#include <QAbstractItemModel>
 #include <QList>
 #include <helpers/Environments.h>
 #include <QVariantMap>
+#include  <QObject>
 
 // Model ini mengasumsikan semua baris memiliki set kunci (kolom) yang sama.
 class TableModel : public QAbstractTableModel
